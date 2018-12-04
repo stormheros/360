@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .box{
+        height: 40px;
+        width: 500px;
+        /* border: 1px solid #ccc; */
+        background-color: yellow;
+        margin: 200px auto; 
+        background-image: linear-gradient(
+           135deg,
+           /* to right, */
+             transparent 25%,
+             green     25%,
+             green     50%,
+             transparent 50%,
+             transparent 75%,
+             green     75%
+        );
+        background-size: 40px;
+        /* background-repeat: no-repeat; */
+        animation: login 1s infinite linear;
+        position: relative;
+    }
+    .bg{
+        transform: rotateZ(45deg);
+        background-image: linear-gradient(
+           /* 135deg, */
+           to right,
+           transparent 25%,
+             green     25%,
+             green     50%,
+             transparent 50%,
+             transparent 75%,
+             green     75%
+
+        );
+        background-size:  80px 80px;
+        /* background-repeat: no-repeat; */
+        animation: login1 2s infinite linear;
+    }
+    @keyframes login{
+        from{
+            background-position: 0;
+        }
+        to{
+            background-position: 40px;
+        }
+    }
+    @keyframes login1{
+        from{
+            background-position: 0;
+        }
+        to{
+            background-position: 80px;
+        }
+    }
+
+    </style>
+</head>
+<body>
+    <div class="box"></div>
+    <script src="./jquery-1.12.4.js"></script>
+    <script>
+        $('.box').hover(function(e){
+            $(this).append('<div></div>');
+            $(this).children('div').css({
+                'height':'80px', 
+                'width': '80px',
+                'position':'absolute',
+                'background-color':'yellow',
+                'top': '-20px',
+                'left': e.clientX - $(this).offset().left +'px'
+            }).addClass('bg');
+        },function(){
+            $(this).children().remove();
+        });
+        $('.box').mousemove(function(e){
+            $(this).children('div').css('left', e.clientX - $(this).offset().left - 40 +'px');
+            if(e.clientX < $(this).offset().left || e.clientX>$(this).offset().left+500){
+                $(this).children().remove();
+            }
+        })
+    
+    
+    </script>
+</body>
+</html>
